@@ -11,6 +11,17 @@ inputs:
     description: OpenTofu workspace to get outputs from
     required: false
     default: "default"
+  variables:
+    description: |
+      Variables to set when initializing OpenTofu. This should be valid OpenTofu syntax - like a [variable definition file](https://opentofu.org/docs/language/values/variables/#variable-definitions-tfvars-files).
+
+      Variables set here override any given in `var_file`s.
+    required: false
+  var_file:
+    description: |
+      List of tfvars files to use, one per line.
+      Paths should be relative to the GitHub Actions workspace
+    required: false
   backend_config:
     description: List of OpenTofu backend config values, one per line.
     required: false
@@ -26,7 +37,7 @@ runs:
   env:
     OPENTOFU: true
   using: docker
-  image: docker://ghcr.io/dflook/terraform-github-actions@sha256:3b17c6aec3cf2a1f21e7ca7c7b44c50193c735c285a3d18d82d59e3f1000d3cb
+  image: docker://ghcr.io/dflook/terraform-github-actions@sha256:4cf47837e26f42c9835b28c514215a77a6b523bd2c1cbfeb8b9e32f1ccc5d7c0
   entrypoint: /entrypoints/output.sh
 
 branding:
